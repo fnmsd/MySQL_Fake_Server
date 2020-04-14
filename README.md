@@ -67,6 +67,7 @@ https://paper.seebug.org/1112/
 https://github.com/codeplutos/MySQL-JDBC-Deserialization-Payload
 
 **协议相关：**
+
 https://dev.mysql.com/doc/internals/en/protocoltext-resultset.html
 
 https://dev.mysql.com/doc/internals/en/character-set.html
