@@ -11,7 +11,7 @@
 ## 说明
 1. 需要python3环境，无任何其它依赖。
 2. 根据**登录用户名**返回文件读取利用报文、反序列化利用报文。
-3. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能。
+3. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能，支持ServerStatusDiffInterceptor和detectCustomCollations两种方式。
 4. MySQL的用户名支持冒号、斜杠等特殊符号，但是能否使用还需看具体客户端环境。
 5. 运行：`python server.py`
 6. config.ini中预置了一部分配置信息
