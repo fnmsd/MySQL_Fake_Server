@@ -1,0 +1,13 @@
+{
+    "fileread":{
+        "win_ini":"c:\\windows\\win.ini",
+        "win_hosts":"c:\\windows\\system32\\drivers\\etc\\hosts",
+        "win":"c:\\windows\\",
+        "linux_passwd":"/etc/passwd",
+        "linux_hosts":"/etc/hosts",
+        "index_php":"index.php"
+    },
+    "yso":{
+        "Jdk7u21":["Jdk7u21","calc"]
+    }
+}
