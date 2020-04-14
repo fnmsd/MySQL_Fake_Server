@@ -101,6 +101,9 @@ def handle_server(server_reader, server_writer):
                     ResultSet(("system_time_zone","UTC")).write(server_writer)
                     ResultSet(("time_zone","SYSTEM")).write(server_writer)
                     ResultSet(("init_connect","")).write(server_writer)
+                    ResultSet(("auto_increment_increment","1")).write(server_writer)
+                    ResultSet(("max_allowed_packet","10000")).write(server_writer)
+
                     result = EOF(capability, handshake.status)
             elif username in yso_dict:
                     #Serial Data

