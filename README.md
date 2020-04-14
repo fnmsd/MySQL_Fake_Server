@@ -7,8 +7,8 @@
 
 ## 用途
 
-1. MySQL服务端恶意读取客户端文件漏洞
-2. JDBC客户端Java反序列化漏洞
+1. MySQL服务端读取客户端文件漏洞利用
+2. MySQL JDBC客户端Java反序列化漏洞利用
 
 ## 说明
 1. 需要python3环境，无任何其它依赖。
@@ -17,9 +17,9 @@
 4. 运行：`python server.py`
 
 ## 测试环境：
-1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化)
+1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化、文件读取)
 2. PHPMyAdmin(Windows+Linux文件读取，可以使用相对路径读取php文件内容)
-3. Navicat 12(Windows下文件读取)
+3. Navicat 12(Windows下文件读取，需要切换到mysql_clear_password认证插件)
 
 ## 使用方法
 1. 文件读取：
@@ -43,6 +43,7 @@
 3. 原python-mysqlproto中的序列检测需要去掉，否则会出错（这个应该是哪里处理有问题导致了序号重置）。
 4. `SHOW SESSION STATUS`和`SHOW COLLATION`的公用列是第二列
 5. mysql java connector 5.x的环境下，需要返回的server版本大于等于5.0.0才会走到`Util.resultSetToMap`进入getObject
+
 ## 顺便招个聘
 
 欢迎各位大佬投递简历，大家一起来愉快地玩耍~^_^
@@ -52,8 +53,8 @@ https://www.anquanke.com/post/id/200462
 ## 参考资料
 
 **项目基础：**
-https://github.com/waldiTM/python-mysqlproto
 
+https://github.com/waldiTM/python-mysqlproto
 
 膜拜大佬实现的Python版mysql协议，一切都是在此项目上进行的修改。
 
