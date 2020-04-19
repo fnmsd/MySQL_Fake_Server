@@ -41,27 +41,27 @@
 
 ### ServerStatusDiffInterceptor触发
 
-- **8.x: **`jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_JRE8u20_calc`
+- **8.x:** `jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_JRE8u20_calc`
 
-- **6.x(属性名不同): **`jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&statementInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_JRE8u20_calc`
+- **6.x(属性名不同):** `jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&statementInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_JRE8u20_calc`
 
-- **5.1.11及以上的5.x版本（包名没有了cj）: **`jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&statementInterceptors=com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_JRE8u20_calc`
+- **5.1.11及以上的5.x版本（包名没有了cj）:**` jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&statementInterceptors=com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_JRE8u20_calc`
 
-- **5.1.10及以下的5.1.X版本：**同上，但是需要连接后执行查询。
+- **5.1.10及以下的5.1.X版本：** 同上，但是需要连接后执行查询。
 
-- **5.0.x: **还没有`ServerStatusDiffInterceptor`这个东西┓( ´∀` )┏
+- **5.0.x:** 还没有`ServerStatusDiffInterceptor`这个东西┓( ´∀` )┏
 
 ### detectCustomCollations触发：
 
-- **5.1.41及以上: **不可用
+- **5.1.41及以上:** 不可用
 
-- **5.1.29-5.1.40: **`jdbc:mysql://127.0.0.1:3306/test?detectCustomCollations=true&autoDeserialize=true&user=yso_JRE8u20_calc`
+- **5.1.29-5.1.40:** `jdbc:mysql://127.0.0.1:3306/test?detectCustomCollations=true&autoDeserialize=true&user=yso_JRE8u20_calc`
 
-- **5.1.28-5.1.19：**`jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&user=yso_JRE8u20_calc`
+- **5.1.28-5.1.19：** `jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&user=yso_JRE8u20_calc`
 
-- **5.1.18以下的5.1.x版本：  **不可用
+- **5.1.18以下的5.1.x版本：** 不可用
 
-- **5.0.x版本不可用 **
+- **5.0.x版本不可用** 
 
 ## 效果
 
