@@ -36,7 +36,8 @@
 
 ## JDBC连接串整理
 
-写分析的时候整理了一下：https://www.anquanke.com/post/id/203086，用户名请参考上面的说明进行修改。
+写分析的时候整理了一下：https://www.anquanke.com/post/id/203086
+用户名请参考上面的说明进行修改。
 
 ### ServerStatusDiffInterceptor触发
 
