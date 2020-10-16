@@ -14,7 +14,7 @@
 3. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能，支持ServerStatusDiffInterceptor和detectCustomCollations两种方式。
 4. MySQL的用户名支持冒号、斜杠等特殊符号，但是能否使用还需看具体客户端环境。
 5. 运行：`python server.py`
-6. config.ini中预置了一部分配置信息
+6. **config.json中预置了一部分配置信息，可以自己修改添加指定用户名对应的读取文件和yso参数，详细看下面的说明**
 
 ## 测试环境：
 1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化（JRE8u20）、文件读取)
