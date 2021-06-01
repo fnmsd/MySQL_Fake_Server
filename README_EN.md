@@ -22,10 +22,11 @@ File Reading
 ![image-20210531165349198](README.assets/image-20210531165349198.png)
 
 - Do not use cmd.exe to test MD5sum, it will be different if you copy cmd.exe from the system32 directory to other directory.
--Now you can save the read file to a file (the file name is "client ip\_\_\_timestamp\_\_\_file path with special characters replaced")
--Since the current file content is read all at one time before writing, so if you want to read GB-level files, please calculate the memory size by yourself.
--Added the function of reading preset files in case of unknown user name(__defaultFiles option in config.json)
--The version 5.1.x needs to add a `maxAllowedPacket=655360` property to the connection string, otherwise an error will be reported. 
+- Now you can save the read file to a file (the file name is "client ip\_\_\_timestamp\_\_\_file path with special characters replaced")
+- Since the current file content is read all at one time before writing, so if you want to read GB-level files, please calculate the memory size by yourself.
+- Added the function of reading preset files in case of unknown user name(__defaultFiles option in config.json)
+- The MySQL JDBC Connector version 5.1.x needs to add a `maxAllowedPacket=655360` property to the connection string, otherwise an error will be reported. 
+- For JDBC environment' something else :[https://blog.csdn.net/fnmsd/article/details/117436182](https://blog.csdn.net/fnmsd/article/details/117436182)
 
 Added config.json configuration items
 

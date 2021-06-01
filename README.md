@@ -27,7 +27,8 @@
 - 现在可以将读取到文件保存到文件中（文件名为“客户端ip\_\_\_时间戳\_\_\_替换掉特殊字符的文件路径”，特殊字符为"/\\:"）
 - 由于目前是一次性读完文件内容后再进行写入，所以如果想读GB级文件的朋友请自行掂量内存大小，或者将写入改为读一部分写一部分
 - 增加了未知用户名情况下，读取预设文件的功能(非预置用户名且非yso\_和fileread\_开头，config.json中__defaultFiles选项)
-- 目前测5.1.x的版本需要在连接串中加一个`maxAllowedPacket=655360`属性，否则会报错，有兴趣的师傅可以自己跟一下原因。
+- 目前测MySQL JDBC Connector 5.1.x的版本需要在连接串中加一个`maxAllowedPacket=655360`属性，否则会报错，有兴趣的师傅可以自己跟一下原因。
+- 有关JDBC下的`allowUrlInLocalInfile`选项可以看下这篇：[https://blog.csdn.net/fnmsd/article/details/117436182](https://blog.csdn.net/fnmsd/article/details/117436182)
 
 **增加了config.json配置项目**
 
