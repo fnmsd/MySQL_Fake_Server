@@ -7,7 +7,9 @@ class _MysqlStreamSequence:
 
     def __init__(self):
         self._seq = 0
-
+    def get_seq(self):
+        return self._seq
+        
     def check(self, seq):
         # if seq != self._seq:
         #     raise RuntimeError('Wrong sequence, expected {}, got {}'.format(self._seq, seq))
@@ -31,6 +33,8 @@ class MysqlPacketReader:
         self.__length = 0
         self.__follow = True
 
+    def get_seq(self):
+        return self._seq.get_seq()
     def _check_lead(self, ldata):
         if not ldata or len(ldata) != 4:
             raise RuntimeError

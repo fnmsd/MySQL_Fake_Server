@@ -8,6 +8,31 @@ Modified from Poject:https://github.com/waldiTM/python-mysqlproto
 1. MySQL Client Arbitrary File Reading Exploit
 2. MySQL JDBC Client's Java Deserialization Vulnerable Exploit
 
+## Update Information
+
+**2021.05.31**
+
+Happy Children's Day~
+
+File Reading
+
+-Supports the reading of large files, and can read binary files completely.
+-Tested the PDF\EXE\ZIP\JAR file, and tested the ysoserial(50MB). The MD5sum is same and can be used normally.
+
+![image-20210531165349198](README.assets/image-20210531165349198.png)
+
+- Do not use cmd.exe to test MD5sum, it will be different if you copy cmd.exe from the system32 directory to other directory.
+-Now you can save the read file to a file (the file name is "client ip\_\_\_timestamp\_\_\_file path with special characters replaced")
+-Since the current file content is read all at one time before writing, so if you want to read GB-level files, please calculate the memory size by yourself.
+-Added the function of reading preset files in case of unknown user name(__defaultFiles option in config.json)
+-The version 5.1.x needs to add a `maxAllowedPacket=655360` property to the connection string, otherwise an error will be reported. 
+
+Added config.json configuration items
+
+- java and ysoserial's Location configuration
+- Whether to output preview of the read file (first 1000 bytes to the console)
+- File save path and save switch
+
 ## Description
 1. Python3 Environment ，no need to install other package.
 2. Run Command：`python server.py`
@@ -26,6 +51,13 @@ Default config.json:
 
 ```json
 {
+     "config":{
+        "ysoserialPath":"ysoserial-0.0.6-SNAPSHOT-all.jar", //YsoSerial Location
+        "javaBinPath":"java",//java Command Location
+        "fileOutputDir":"./fileOutput/",//File Save Directory
+        "displayFileContentOnScreen":true,//Whether to preview the content of the output file to the console
+        "saveToFile":true//Whether to save the file
+    },
 //File Reading Params
     "fileread":{
         "win_ini":"c:\\windows\\win.ini",//key is username,value is the path for file reading
@@ -33,7 +65,8 @@ Default config.json:
         "win":"c:\\windows\\",
         "linux_passwd":"/etc/passwd",
         "linux_hosts":"/etc/hosts",
-        "index_php":"index.php"
+        "index_php":"index.php",
+        "__defaultFiles":["/etc/hosts","c:\\windows\\system32\\drivers\\etc\\hosts"]//Randomly select files to read in case of unknown user name
     },
 //ysoserial Params
     "yso":{

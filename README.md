@@ -10,13 +10,42 @@
 1. MySQL服务端读取客户端文件漏洞利用
 2. MySQL JDBC客户端Java反序列化漏洞利用
 
+## 更新说明
+
+**2021.06.01**
+
+儿童节快乐~
+
+**文件读取部分**
+
+- 支持了大文件的读取，可完整的读取二进制文件。
+- 测试了PDF\EXE\ZIP\JAR文件，最大测试了读50MB的ysoserial，md5正常，可正常使用。
+
+![image-20210531165349198](README.assets/image-20210531165349198.png)
+
+- 请勿使用cmd.exe等测试吗md5，从system32目录中拷出来md5就不一样了。
+- 现在可以将读取到文件保存到文件中（文件名为“客户端ip\_\_\_时间戳\_\_\_替换掉特殊字符的文件路径”，特殊字符为"/\\:"）
+- 由于目前是一次性读完文件内容后再进行写入，所以如果想读GB级文件的朋友请自行掂量内存大小，或者将写入改为读一部分写一部分
+- 增加了未知用户名情况下，读取预设文件的功能(非预置用户名且非yso\_和fileread\_开头，config.json中__defaultFiles选项)
+- 目前测5.1.x的版本需要在连接串中加一个`maxAllowedPacket=655360`属性，否则会报错，有兴趣的师傅可以自己跟一下原因。
+
+**增加了config.json配置项目**
+
+- java和ysoserial的位置配置
+- 读取到的文件是否输出预览（前1000字节到控制台）
+- 文件保存路径及保存开关
+
+**其它**
+
+- Ctrl+C可以直接关闭server了
+
 ## 说明
 1. 需要python3环境，无任何其它依赖。
 2. 运行：`python server.py`
 3. 需要[ysoserial](https://github.com/frohoff/ysoserial)才能用反序列化功能，支持`ServerStatusDiffInterceptor`和`detectCustomCollations`两种方式。
 4. MySQL的用户名支持冒号、斜杠等特殊符号，但是能否使用还需看具体客户端环境。
-5. 根据**登录用户名**返回文件读取利用报文、反序列化利用报文。
-6. **推荐用法：**config.json中预置了一部分配置信息，可以自己修改添加指定用户名对应的读取文件和yso参数，详细看下面的说明
+5. 根据 **登录用户名** 返回文件读取利用报文、反序列化利用报文。
+6. **推荐用法：** config.json中预置了一部分配置信息，可以自己修改添加指定用户名对应的读取文件和yso参数，详细看下面的说明
 
 ## 测试环境：
 1. jdk1.8.20+mysql-connector-java 8.0.14/5.1.22(Windows下反序列化（JRE8u20）、文件读取)
@@ -28,6 +57,13 @@
 
 ```json
 {
+     "config":{
+        "ysoserialPath":"ysoserial-0.0.6-SNAPSHOT-all.jar", //YsoSerial位置
+        "javaBinPath":"java",//java运行命令位置
+        "fileOutputDir":"./fileOutput/",//读取文件的保存目录
+        "displayFileContentOnScreen":true,//是否输出文件内容预览到控制台
+        "saveToFile":true//是否保存文件
+    },
 //文件读取参数
     "fileread":{
         "win_ini":"c:\\windows\\win.ini",//key为设定的用户名,value为要读取的文件路径
@@ -35,7 +71,9 @@
         "win":"c:\\windows\\",
         "linux_passwd":"/etc/passwd",
         "linux_hosts":"/etc/hosts",
-        "index_php":"index.php"
+        "index_php":"index.php",
+        "__defaultFiles":["/etc/hosts","c:\\windows\\system32\\drivers\\etc\\hosts"]//未知用户名情况下随机选择文件读取
+
     },
 //ysoserial参数
     "yso":{

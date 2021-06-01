@@ -1,2 +1,6 @@
 __pycache__
 ysoserial-0.0.6-SNAPSHOT-all.jar
+.vscode
+fileOutput
+fileOutput/*
+out.log
