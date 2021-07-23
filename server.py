@@ -191,7 +191,7 @@ if __name__ == "__main__":
     if 'config' in data:
         config_data = data['config']
         if 'ysoserialPath' in config_data:
-            ysoserial_path = config_data['javaBinPath']
+            ysoserialPath = config_data['ysoserialPath']
         if 'javaBinPath' in config_data:
             javaBinPath = config_data['javaBinPath']
         if 'fileOutputDir' in config_data:
