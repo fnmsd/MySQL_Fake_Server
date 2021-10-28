@@ -152,9 +152,9 @@ JDK 1.8.20+mysql-connector-java 8.0.14反序列化，使用用户名：yso_JRE8u
 
 ## 招聘了招聘~
 
-360云安全团队目前大量招聘中，欢迎各位大佬投递简历，大家一起来愉快地玩耍~^_^
+阿里云安全WAF&RASP团队目前招聘中，欢迎各位大佬投递简历，大家一起来愉快地玩耍~^_^
 
-https://www.anquanke.com/post/id/200462
+lifangrun.lfr@alibaba-inc.com
 
 ## 参考资料
 
