@@ -174,3 +174,7 @@ https://dev.mysql.com/doc/internals/en/character-set.html
 
 https://dev.mysql.com/doc/internals/en/com-query-response.html#packet-Protocol::LOCAL_INFILE_Data
 
+## 404Starlink
+<img src="https://github.com/knownsec/404StarLink-Project/raw/master/logo.png" width="30%">
+
+MySQL_Fake_Server has joined [404Starlink](https://github.com/knownsec/404StarLink)
